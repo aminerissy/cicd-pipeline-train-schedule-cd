@@ -64,6 +64,7 @@ pipeline {
                                         cleanRemote: false,
                                         execTimeout: 120000,
                                         usePty: true,
+                                        useAgentForwarding: true,
                                         sourceFiles: 'dist/app.zip',
                                         removePrefix: 'dist/',
                                         remoteDirectory: '/tmp',
