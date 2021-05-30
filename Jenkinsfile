@@ -71,14 +71,14 @@ pipeline {
                                         sourceFiles: 'dist/app.zip',
                                         removePrefix: 'dist/',
                                         remoteDirectory: '/tmp',
-                                        execCommand: 'mkdir /home/deploy/deleteme'  
+                                        execCommand: 'rmdir /home/deploy/deleteme'  
                                     )
                                 ]
                             
                             )
                         ]
                     )
-                sshCommand remote: remote, command: 'mkdir /home/deploy/deleteme1'
+                // sshCommand remote: remote, command: 'mkdir /home/deploy/deleteme1'
                 }
             }
         }
