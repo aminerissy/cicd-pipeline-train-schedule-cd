@@ -65,6 +65,7 @@ pipeline {
                                         execTimeout: 120000,
                                         usePty: true,
                                         useAgentForwarding: true,
+                                        useSftpForExec: true,
                                         sourceFiles: 'dist/app.zip',
                                         removePrefix: 'dist/',
                                         remoteDirectory: '/tmp',
