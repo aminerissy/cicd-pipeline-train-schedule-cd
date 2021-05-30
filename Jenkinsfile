@@ -61,15 +61,12 @@ pipeline {
                                 ], 
                                 transfers: [
                                     sshTransfer(
-                                        execCommand: 'sudo mkdir /home/deploy/deleteme'
-                                        //execCommand: 'sudo /usr/bin/systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule'
-                                    ),
-                                    sshTransfer(
+                                        cleanRemote: false,
                                         sourceFiles: 'dist/app.zip',
                                         removePrefix: 'dist/',
-                                        remoteDirectory: '/tmp'
-                                        //execCommand: '/bin/sh mkdir /home/deploy/deleteme'
-                                        //execCommand: 'sudo /usr/bin/systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule'
+                                        remoteDirectory: '/tmp',
+                                        //execCommand: 'mkdir /home/deploy/deleteme'
+                                        execCommand: 'sudo /usr/bin/systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule'
                                     )
                                 ]
                             )
