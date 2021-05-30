@@ -68,9 +68,10 @@ pipeline {
                                         useSftpForExec: true,
                                         sourceFiles: 'dist/app.zip',
                                         removePrefix: 'dist/',
-                                        remoteDirectory: '/tmp',
-                                        //execCommand: 'mkdir /home/deploy/deleteme'
-                                        sh: "sudo /usr/bin/systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule"
+                                        remoteDirectory: '/tmp'
+                                    ),
+                                    sshTransfer(
+                                        execCommand: "sudo /usr/bin/systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule"
                                     )
                                 ]
                             )
