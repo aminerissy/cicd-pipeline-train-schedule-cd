@@ -71,7 +71,7 @@ pipeline {
                                         sourceFiles: 'dist/app.zip',
                                         removePrefix: 'dist/',
                                         remoteDirectory: '/tmp',
-                                        execCommand: 'mkdir /home/deploy/deleteme'  
+                                        execCommand: 'rmdir /home/deploy/deleteme'  
                                     )
                                 ]
             
