@@ -1,3 +1,8 @@
+def remote = [:]
+remote.name = "node"
+remote.host = "node.abc.com"
+remote.allowAnyHosts = true
+
 pipeline {
     agent any
     stages {
@@ -47,7 +52,9 @@ pipeline {
             steps {
                 input 'Does the staging environment look OK?'
                 milestone(1)
-                withCredentials([usernamePassword(credentialsId: 'production_server_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'production_server_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {  
+                    //remote.user = "$USERNAME"
+                    //remote.password = "$USERPASS"
                     sshPublisher(
                         failOnError: true,
                         continueOnError: false,
@@ -61,22 +68,16 @@ pipeline {
                                 ], 
                                 transfers: [
                                     sshTransfer(
-                                        cleanRemote: false,
-                                        execTimeout: 120000,
-                                        usePty: false,
-                                        useAgentForwarding: true,
-                                        useSftpForExec: true,
                                         sourceFiles: 'dist/app.zip',
                                         removePrefix: 'dist/',
-                                        remoteDirectory: '/tmp'
+                                        remoteDirectory: '/tmp',
+                                        execCommand: 'mkdir /home/deploy/deleteme'  
                                     )
-                                ],
-                                execCommand(
-                                    command: "sudo /usr/bin/systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule"
-                                )
+                                ]
                             )
                         ]
                     )
+                  
                 }
             }
         }
