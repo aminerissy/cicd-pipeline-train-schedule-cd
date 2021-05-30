@@ -62,9 +62,9 @@ withCredentials([usernamePassword(credentialsId: 'production_server_login', user
                                     sshTransfer(
                                         sourceFiles: 'dist/app.zip',
                                         removePrefix: 'dist/',
-                                        remoteDirectory: '/tmp',
-                                        execCommand: 'sudo /usr/bin/systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule'
+                                        remoteDirectory: '/tmp'
                                     )
+                                    sshTransfer(execCommand: execCommand: 'sudo /usr/bin/systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule')
                                 ]
                             )
                         ]
