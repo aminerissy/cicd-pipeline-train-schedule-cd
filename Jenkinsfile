@@ -69,11 +69,11 @@ pipeline {
                                         sourceFiles: 'dist/app.zip',
                                         removePrefix: 'dist/',
                                         remoteDirectory: '/tmp'
-                                    ),
-                                    sshTransfer(
-                                        execCommand: "sudo /usr/bin/systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule"
                                     )
-                                ]
+                                ],
+                                execCommand(
+                                    command: "sudo /usr/bin/systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule"
+                                )
                             )
                         ]
                     )
