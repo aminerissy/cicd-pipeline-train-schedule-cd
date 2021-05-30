@@ -63,7 +63,7 @@ pipeline {
                                     sshTransfer(
                                         cleanRemote: false,
                                         execTimeout: 120000,
-                                        usePty: true,
+                                        usePty: false,
                                         useAgentForwarding: true,
                                         useSftpForExec: true,
                                         sourceFiles: 'dist/app.zip',
