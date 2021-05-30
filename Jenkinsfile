@@ -54,13 +54,14 @@ pipeline {
                         publishers: [
                             sshPublisherDesc(
                                 configName: 'production',
+                                verbose: true,
                                 sshCredentials: [
                                     username: "$USERNAME",
                                     encryptedPassphrase: "$USERPASS"
                                 ], 
                                 transfers: [
                                     sshTransfer(
-                                        execCommand: 'sudo /bin/sh mkdir /home/deploy/deleteme'
+                                        execCommand: 'sudo mkdir /home/deploy/deleteme'
                                         //execCommand: 'sudo /usr/bin/systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule'
                                     ),
                                     sshTransfer(
