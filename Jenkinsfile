@@ -9,7 +9,6 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Running build automation'
-                sh 'sudo apt install default-jre'
                 sh './gradlew build --no-daemon'
                 archiveArtifacts artifacts: 'dist/app.zip'
             }
@@ -72,7 +71,7 @@ pipeline {
                                         sourceFiles: 'dist/app.zip',
                                         removePrefix: 'dist/',
                                         remoteDirectory: '/tmp',
-                                        execCommand: 'sudo systemctl stop trainSchedule && sudo rm -rf /opt/app/* && sudo apt-get update -y && sudo apt install unzip && sudo unzip /tmp/app.zip -d /opt/app && sudo systemctl start trainSchedule'  
+                                        execCommand: 'sudo systemctl stop trainSchedule && sudo rm -rf /opt/app/* && sudo unzip /tmp/app.zip -d /opt/app && sudo systemctl start trainSchedule'  
                                     )
                                 ]
                             )
