@@ -53,8 +53,8 @@ pipeline {
                 input 'Does the staging environment look OK?'
                 milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'production_server_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {  
-                    //remote.user = "$USERNAME"
-                    //remote.password = "$USERPASS"
+                    remote.user = "$USERNAME"
+                    remote.password = "$USERPASS"
                     sshPublisher(
                         failOnError: true,
                         continueOnError: false,
@@ -74,10 +74,11 @@ pipeline {
                                         execCommand: 'mkdir /home/deploy/deleteme'  
                                     )
                                 ]
+                            
                             )
                         ]
                     )
-                  
+                sshCommand remote: remote, command: 'mkdir /home/deploy/deleteme1'
                 }
             }
         }
