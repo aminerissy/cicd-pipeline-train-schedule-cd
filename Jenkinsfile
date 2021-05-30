@@ -71,10 +71,9 @@ pipeline {
                                         sourceFiles: 'dist/app.zip',
                                         removePrefix: 'dist/',
                                         remoteDirectory: '/tmp',
-                                        execCommand: 'sudo systemctl stop trainSchedule && rm -rf /opt/app/* && unzip /tmp/app.zip -d /opt/app && sudo /usr/bin/systemctl start trainSchedule'  
+                                        execCommand: 'sudo systemctl stop trainSchedule && rm -rf /opt/app/* && sudo apt install unzip && unzip /tmp/app.zip -d /opt/app && sudo systemctl start trainSchedule'  
                                     )
                                 ]
-            
                             )
                         ]
                     )
